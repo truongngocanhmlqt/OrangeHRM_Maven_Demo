@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Orange HRM">
+
+    <listeners>
+        <listener class-name="reportConfigs.ExtentListener"></listener>
+
+    </listeners>
+    
+    <parameter name="userURL" value="http://localhost:90/orangehrm5"></parameter>
+
+    <test name="Run Tests on Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.OrangeHRM.PIM.PIM_02_Employee" />
+        </classes>
+    </test>
+
+
+
+</suite>
