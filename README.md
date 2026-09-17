@@ -63,32 +63,6 @@ OrangeHRM_Maven_Demo/
 - Validate required fields in salary component (`PIM_03_EmployeeEmploymentTests`)
 - Validate required fields in report-to form (`PIM_03_EmployeeEmploymentTests`)
 
-## Configuration
-The committed `src/main/resources/config.properties` file is a safe template.
-
-For local execution:
-1. Copy `src/main/resources/config.local.properties.example`
-2. Rename it to `src/main/resources/config.local.properties`
-3. Fill in your real environment values
-
-Example local config:
-
-```properties
-browser=chrome
-app.url=http://localhost:90/orangehrm5
-admin.username=your-real-admin-username
-admin.password=your-real-admin-password
-wait.short=5
-wait.long=15
-retry.count=3
-headless=false
-```
-
-Configuration priority:
-1. Java system properties (`-Dapp.url=...`)
-2. Environment variables (`APP_URL`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`)
-3. `config.local.properties`
-4. `config.properties`
 
 ## Run locally
 Compile only:
@@ -144,16 +118,4 @@ This keeps the public repository safe while still demonstrating CI integration.
 - Extent HTML: `htmlExtent/ExtentReport.html`
 - Allure results: `allure-results/`
 
-## Notes for recruiters / reviewers
-This project is intended to demonstrate:
-- automation framework structure
-- reusable Page Objects
-- externalized test configuration
-- reporting integration
-- CI/Docker readiness for UI automation
 
-## Suggested next improvements
-- migrate package names to full lowercase Java convention
-- move Excel test data to typed data builders / DataProviders
-- add remote execution with Selenium Grid
-- add API or database validation layers
