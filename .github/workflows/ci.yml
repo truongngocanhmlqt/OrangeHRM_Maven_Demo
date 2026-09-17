@@ -1,0 +1,56 @@
+name: OrangeHRM CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-optional-ui-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Compile project
+        run: mvn -q -DskipTests compile
+
+      - name: Install Chrome dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium chromium-driver
+
+      - name: Run UI tests when secrets are configured
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: |
+          if [ -z "$APP_URL" ] || [ -z "$ADMIN_USERNAME" ] || [ -z "$ADMIN_PASSWORD" ]; then
+            echo "Skipping UI tests because APP_URL / ADMIN_USERNAME / ADMIN_PASSWORD secrets are not configured."
+            exit 0
+          fi
+          mvn clean test \
+            -Dheadless=true \
+            -Dapp.url="$APP_URL" \
+            -Dadmin.username="$ADMIN_USERNAME" \
+            -Dadmin.password="$ADMIN_PASSWORD"
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: orangehrm-artifacts
+          path: |
+            target/
+            allure-results/
+            htmlExtent/

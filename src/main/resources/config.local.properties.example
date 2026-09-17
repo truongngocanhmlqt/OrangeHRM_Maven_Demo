@@ -1,0 +1,12 @@
+# Copy this file to config.local.properties for local execution.
+# config.local.properties is ignored by Git.
+
+browser=chrome
+app.url=http://localhost:90/orangehrm5
+admin.username=your-real-admin-username
+admin.password=your-real-admin-password
+wait.short=5
+wait.long=15
+retry.count=3
+headless=false
+
