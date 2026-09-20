@@ -1,20 +1,13 @@
 version: '3.8'
 
+# Before running: copy src/main/resources/config.local.properties.example
+# to config.local.properties and fill in your real app.url / admin credentials.
+# That file is git-ignored, so secrets never get committed or pushed.
 services:
   orangehrm-tests:
     build: .
     container_name: orangehrm-maven-demo
-    environment:
-      HEADLESS: "true"
-      APP_URL: ${APP_URL:-http://host.docker.internal:90/orangehrm5}
-      ADMIN_USERNAME: ${ADMIN_USERNAME:-your-admin-username}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-your-admin-password}
     volumes:
       - .:/workspace
     working_dir: /workspace
-    command: >
-      mvn clean test
-      -Dheadless=true
-      -Dapp.url=${APP_URL:-http://host.docker.internal:90/orangehrm5}
-      -Dadmin.username=${ADMIN_USERNAME:-your-admin-username}
-      -Dadmin.password=${ADMIN_PASSWORD:-your-admin-password}
+    command: mvn clean test -Dheadless=true

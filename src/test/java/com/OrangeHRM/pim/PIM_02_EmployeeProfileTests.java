@@ -4,12 +4,21 @@ import PageObjects.pim.employee.employeeTabs.ContactDetailsPO;
 import PageObjects.pim.employee.employeeTabs.DependentsPO;
 import PageObjects.pim.employee.employeeTabs.EmergencyContactsPO;
 import PageObjects.pim.employee.employeeTabs.PersonalDetailPO;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.openqa.selenium.Dimension;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Epic("Orange HRM Demo")
+@Feature("Employee Management")
 public class PIM_02_EmployeeProfileTests extends BaseEmployeeTests {
 
+    @Story("Upload Avatar")
+    @Severity(SeverityLevel.MINOR)
     @Test(description = "Upload employee avatar")
     public void Employee_02_Upload_Avatar() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -25,6 +34,8 @@ public class PIM_02_EmployeeProfileTests extends BaseEmployeeTests {
         Assert.assertTrue(personalDetailPage.isProfileDataUpdateSuccess(beforeUpload));
     }
 
+    @Story("Personal Details")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Update personal details")
     public void Employee_03_Personal_Details() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -56,6 +67,8 @@ public class PIM_02_EmployeeProfileTests extends BaseEmployeeTests {
         Assert.assertTrue(personalDetailPage.isGenderMaleRadioSelected("Male"));
     }
 
+    @Story("Contact Details")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Update contact details")
     public void Employee_04_Contact_Details() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -90,6 +103,8 @@ public class PIM_02_EmployeeProfileTests extends BaseEmployeeTests {
         Assert.assertEquals(contactDetailsPage.getTextboxValueByText(driver, "Other Email"), otherEmail);
     }
 
+    @Story("Emergency Contact")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Add and delete emergency contact")
     public void Employee_05_Emergency_Contact() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -113,6 +128,8 @@ public class PIM_02_EmployeeProfileTests extends BaseEmployeeTests {
         Assert.assertTrue(emergencyContactsPage.isDataRowEmergencyContactUndisplayed("1", emergencyName, emergencyRelationship, emergencyHomeTelephone));
     }
 
+    @Story("Dependents")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Add and delete dependent")
     public void Employee_06_Dependents() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();

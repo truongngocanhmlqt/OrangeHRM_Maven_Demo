@@ -36,6 +36,7 @@ build/
 
 ### Project-specific ###
 allure-results/
+allure-report/
 htmlExtent/
 htmlAllure/
 htmlReportNG/

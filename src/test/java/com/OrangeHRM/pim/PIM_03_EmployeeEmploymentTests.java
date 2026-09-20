@@ -5,11 +5,20 @@ import PageObjects.pim.employee.employeeTabs.JobPO;
 import PageObjects.pim.employee.employeeTabs.PersonalDetailPO;
 import PageObjects.pim.employee.employeeTabs.ReportToPO;
 import PageObjects.pim.employee.employeeTabs.SalaryPO;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+@Epic("Orange HRM Demo")
+@Feature("Employee Management")
 public class PIM_03_EmployeeEmploymentTests extends BaseEmployeeTests {
 
+    @Story("Immigration")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Add and delete immigration record")
     public void Employee_07_Immigration() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -35,6 +44,8 @@ public class PIM_03_EmployeeEmploymentTests extends BaseEmployeeTests {
         Assert.assertTrue(immigrationPage.isDataRowImmigrationUndisplayed("1", "Passport", immigrationNumber, "Viet Nam", immigrationIssueDate));
     }
 
+    @Story("Job")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Update employee job information")
     public void Employee_08_Job() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -57,6 +68,8 @@ public class PIM_03_EmployeeEmploymentTests extends BaseEmployeeTests {
         Assert.assertEquals(jobPage.getLocationTextboxValue(), location);
     }
 
+    @Story("Salary")
+    @Severity(SeverityLevel.MINOR)
     @Test(description = "Validate required fields in salary component")
     public void Employee_09_Salary() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();
@@ -71,6 +84,8 @@ public class PIM_03_EmployeeEmploymentTests extends BaseEmployeeTests {
         Assert.assertTrue(salaryPage.isRequiredTextDisplayedInAMount());
     }
 
+    @Story("Report To")
+    @Severity(SeverityLevel.MINOR)
     @Test(description = "Validate required fields in report-to supervisor form")
     public void Employee_10_ReportTo() {
         PersonalDetailPO personalDetailPage = createEmployeeAndOpenPersonalDetails();

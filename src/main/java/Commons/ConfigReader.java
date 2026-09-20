@@ -4,6 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Reads key-value configuration from properties files.
+ *
+ * Load order (later file overrides earlier one for the same key):
+ *   1. config.properties        - committed defaults, safe to share
+ *   2. config.local.properties  - optional, personal/local overrides, not committed to git
+ */
 public class ConfigReader {
     private static final Properties properties = new Properties();
 
@@ -31,20 +38,6 @@ public class ConfigReader {
     }
 
     public static String getProperty(String key, String defaultValue) {
-        String systemValue = System.getProperty(key);
-        if (systemValue != null && !systemValue.trim().isEmpty()) {
-            return systemValue.trim();
-        }
-
-        String envValue = System.getenv(toEnvironmentKey(key));
-        if (envValue != null && !envValue.trim().isEmpty()) {
-            return envValue.trim();
-        }
-
         return properties.getProperty(key, defaultValue).trim();
-    }
-
-    private static String toEnvironmentKey(String key) {
-        return key.replace('.', '_').replace('-', '_').toUpperCase();
     }
 }
